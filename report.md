@@ -7,14 +7,60 @@
 На тестирование затрачено: 24 часа
 
 В результате тестирования выявлены следующие дефекты:
-* Ошибка при попытке валидации номера карты American Express - https://github.com/happyagro/work1/issues/1#issue-845299750
-* Ошибка при попытке валидации номера карты Diners Club - Carte Blanche - https://github.com/happyagro/work1/issues/2#issue-845299880
-* Ошибка при попытке валидации номера карты Diners Club - Carte Blanche - https://github.com/happyagro/work1/issues/3#issue-845299985
+* Ошибка при попытке валидации номера карты American Express - [Issue#1](https://github.com/happyagro/work1/issues/1#issue-845299750)
+* Ошибка при попытке валидации номера карты Diners Club - Carte Blanche - [Issue#2](https://github.com/happyagro/work1/issues/2#issue-845299880)
+
 
 ## Описание процесса тестирования
 
 В процессе тестирования использовались следующие артефакты:
-* Тест-кейс
+
+* Тестовый сценарий:
+
+1. Взять код из [задачи](https://github.com/netology-code/javaqa-homeworks/tree/master/intro)
+```java
+public class Main {
+  public static void main(String[] args) {
+    // TODO: подставлять номер карты нужно сюда между двойными кавычками, без пробелов
+    String number = "5351719427810741";
+    System.out.println(String.format("Result is %s", isValidCardNumber(number) ? "OK" : "FAIL"));
+  }
+
+  public static boolean isValidCardNumber(String number) {
+    if (number == null) {
+      return false;
+    }
+
+    if (number.length() != 16) {
+      return false;
+    }
+
+    long result = 0;
+    for (int i = 0; i < number.length(); i++) {
+      int digit;
+      try {
+        digit = Integer.parseInt(number.charAt(i) + "");
+      } catch (NumberFormatException e) {
+        return false;
+      }
+
+      if (i % 2 == 0) {
+        digit *= 2;
+        if (digit > 9) {
+          digit -= 9;
+        }
+      }
+      result += digit;
+    }
+
+    return (result != 0) && (result % 10 == 0);
+  }
+}
+```
+2. Произвести ввод данных карт с сайта [freeformatter](https://www.freeformatter.com/credit-card-number-generator-validator.html)
+2. В четвертой строке "String number" в ковычках вставлять номера карт и запускать код сочетанием клавиш Shift+F10
+2. Зафиксировать результат теста в репорте
+
 
 
 
@@ -29,7 +75,6 @@
 * MAESTRO: 0604705992323489
 * MAESTRO: 6762969906331310
 * DINERS CLUB - CARTE BLANCHE: 30128287441748
-* DINERS CLUB - CARTE BLANCHE: 30219204824163
 
 Тестирование производилось в следующем окружении:
 * Windows 10 Pro x64
