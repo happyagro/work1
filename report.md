@@ -9,7 +9,7 @@
 В результате тестирования выявлены следующие дефекты:
 
 **Карты с длинной номера меньше чем 16 символов не работают** [скрин кода](https://monosnap.com/file/hQSR3tdjCWjI98fRvcENf6601w3fJC)
-##Пример:
+## Пример:
 * Ошибка при попытке валидации номера карты American Express - [Issue#1](https://github.com/happyagro/work1/issues/1#issue-845299750)
 * Ошибка при попытке валидации номера карты Diners Club - Carte Blanche - [Issue#2](https://github.com/happyagro/work1/issues/2#issue-845299880)
 
